@@ -404,6 +404,13 @@ struct ImPlotColormapData {
     inline int            GetKeyCount(ImPlotColormap cmap) const                 { return KeyCounts[cmap];                                            }
     inline ImU32          GetKeyColor(ImPlotColormap cmap, int idx) const        { return Keys[KeyOffsets[cmap]+idx];                                 }
     inline void           SetKeyColor(ImPlotColormap cmap, int idx, ImU32 value) { Keys[KeyOffsets[cmap]+idx] = value; RebuildTables();               }
+    inline void           SetKeyColors(ImPlotColormap cmap, ImU32* values) {
+        int count = KeyCounts[cmap];
+        for (int i = 0; i < count; i++) {
+            Keys[KeyOffsets[cmap] + i] = values[i];
+        }
+        RebuildTables(); 
+    }
 
     inline const ImU32*   GetTable(ImPlotColormap cmap) const                    { return &Tables[TableOffsets[cmap]];                                }
     inline int            GetTableSize(ImPlotColormap cmap) const                { return TableSizes[cmap];                                           }
